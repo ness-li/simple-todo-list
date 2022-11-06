@@ -13,7 +13,7 @@ app.use(cors());
 app.use('/todo', todoRouter);
 
 // Greetings
-app.get('/', (req: Request, res: Response) => {
+app.all('/', (req: Request, res: Response) => {
     res.status(200).send(`Welcome to Simple Todo List.`);
 });
 
