@@ -1,21 +1,21 @@
-import express, { Router, Request, Response } from 'express';
-import { Todo, TodoList } from './todoList';
+import express, { Request, Response } from 'express';
+import { TodoList } from '../todoList';
 
-const router: Router = express.Router();
-const todoList: TodoList = new TodoList();
+const router = express.Router();
+const todoList = new TodoList();
 
 router.route('/')
     // Get all todos
     .get((req: Request, res: Response) => {
-        const list: Array<Todo> = todoList.list();
+        const list = todoList.list();
         res.status(200).json(list);
     })
 
     // Create a new todo
     .post((req: Request, res: Response) => {
-        const description: string = req.body.description;
+        const { description } = req.body;
         try {
-            const todo: Todo = todoList.add(description);
+            const todo = todoList.add(description as string);
             res.status(201).json(todo);
         } catch (e: any) {
             res.status(400).json({ error: e });
@@ -27,7 +27,7 @@ router.route('/:id')
     .get((req: Request, res: Response) => {
         const id: string = req.params.id;
         try {
-            const todo: Todo = todoList.read(id);
+            const todo = todoList.read(id);
             res.status(200).json(todo);
         } catch (e: any) {
             res.status(400).json({ error: e });
@@ -39,7 +39,7 @@ router.route('/:id')
         const id: string = req.params.id;
         const description: string = req.body.description;
         try {
-            const todo: Todo = todoList.update(id, description);
+            const todo = todoList.update(id, description);
             res.status(200).json(todo);
         } catch (e: any) {
             res.status(400).json({ error: e });

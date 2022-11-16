@@ -2,7 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-import todoRouter from './todoRouter';
+import todoRouter from './routes/todo';
 
 dotenv.config();
 
