@@ -5,16 +5,16 @@ export interface Todo {
     description?: string
 }
 
-export class TodoList extends Map<string, Todo> {
+export class TodoService extends Map<string, Todo> {
     constructor() {
         super();
     }
 
-    list() {
+    async list() {
         return Array.from(this.values());
     }
 
-    add(description: string) {
+    async create(description: string) {
         if (typeof description !== "string") {
             throw `"description" is missing in the body.`;
         }
@@ -23,14 +23,14 @@ export class TodoList extends Map<string, Todo> {
         return this.get(id);
     }
 
-    read(id: string) {
+    async read(id: string) {
         if (!this.has(id)) {
             throw `Todo with ID ${id} not found.`;
         }
         return this.get(id);
     }
 
-    update(id: string, description: string) {
+    async update(id: string, description: string) {
         if (!this.has(id)) {
             throw `Todo with ID ${id} not found.`;
         }
@@ -41,7 +41,7 @@ export class TodoList extends Map<string, Todo> {
         return this.get(id);
     }
 
-    remove(id: string) {
+    async remove(id: string) {
         if (!this.has(id)) {
             throw `Todo with ID ${id} not found.`;
         }
